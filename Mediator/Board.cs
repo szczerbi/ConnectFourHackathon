@@ -46,7 +46,7 @@ namespace Mediator
 
     public void DrawGamePiece(int column, int row)
     {
-      if (StateController.GameState != GameState.empty)
+      if (StateController.GameState != GameState.Empty)
       {
         return;
       }
@@ -66,11 +66,11 @@ namespace Mediator
       string message;
       switch (winState)
       {
-        case GameState.draw:
+        case GameState.Draw:
           message = "Game Over! It's a draw.";
           break;
-        case GameState.player1:
-        case GameState.player2:
+        case GameState.Player1:
+        case GameState.Player2:
           message = $"{StateController.GetCurrentPlayer().PlayerName} ({StateController.GetCurrentPlayerColor().Name}) wins the game!";
           break;
         default:

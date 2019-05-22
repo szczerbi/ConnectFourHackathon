@@ -47,12 +47,12 @@ namespace Mediator
         }
       }
       // board full check
-      var winState = GameState.draw;
+      var winState = GameState.Draw;
       foreach (var state in board)
       {
-        if (state == GameState.empty)
+        if (state == GameState.Empty)
         {
-          winState = GameState.empty;
+          winState = GameState.Empty;
           break;
         }
       }
@@ -64,7 +64,7 @@ namespace Mediator
     {
       for (int row = 0; row < Constants.BoardHeight; row++)
       {
-        if (board[column, row] == GameState.empty)
+        if (board[column, row] == GameState.Empty)
         {
           return row;
         }

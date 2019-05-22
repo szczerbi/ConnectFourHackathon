@@ -2,16 +2,10 @@
 {
   public enum GameState
   {
-    empty,
-    player1,
-    player2,
-    draw
-  };
-
-  public enum PlayerType
-  {
-    Human,
-    Bot
+    Empty,
+    Player1,
+    Player2,
+    Draw
   };
 
   public static class Constants

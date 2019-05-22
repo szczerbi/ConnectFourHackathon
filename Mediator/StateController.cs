@@ -9,12 +9,12 @@ namespace Mediator
   {
     public StateController(IPlayer player1, IPlayer player2, Board gameBoard)
     {
-      CurrentPlayer = Util.GameState.player1;
-      GameState = Util.GameState.empty;
+      CurrentPlayer = Util.GameState.Player1;
+      GameState = Util.GameState.Empty;
       Player1 = player1;
       Player2 = player2;
-      PlayerMap.Add(Util.GameState.player1, Player1);
-      PlayerMap.Add(Util.GameState.player2, Player2);
+      PlayerMap.Add(Util.GameState.Player1, Player1);
+      PlayerMap.Add(Util.GameState.Player2, Player2);
       GameBoard = gameBoard;
     }
 
@@ -26,9 +26,9 @@ namespace Mediator
     {
       switch (CurrentPlayer)
       {
-        case GameState.player1:
+        case GameState.Player1:
           return PlayerOneColor;
-        case GameState.player2:
+        case GameState.Player2:
           return PlayerTwoColor;
         default:
           return Color.Black;
@@ -45,7 +45,7 @@ namespace Mediator
         _boardState[column, row] = CurrentPlayer;
         GameBoard.DrawGamePiece(column, row);
         GameState = CheckForEndGame();
-        if (GameState == GameState.empty)
+        if (GameState == GameState.Empty)
         {
           UpdateCurrentState();
           GetNextBotMove();
@@ -61,13 +61,13 @@ namespace Mediator
 
     private void UpdateCurrentState()
     {
-      if (CurrentPlayer == GameState.player1)
+      if (CurrentPlayer == GameState.Player1)
       {
-        CurrentPlayer = GameState.player2;
+        CurrentPlayer = GameState.Player2;
       }
       else
       {
-        CurrentPlayer = GameState.player1;
+        CurrentPlayer = GameState.Player1;
       }
     }
 
