@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace ConnectFour
 {
-  public partial class ConnectFourHome : Form
+  public partial class ConnectFourStartPage : Form
   {
-    public ConnectFourHome()
+    public ConnectFourStartPage()
     {
       InitializeComponent();
     }

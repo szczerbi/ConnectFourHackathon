@@ -13,7 +13,7 @@ namespace ConnectFour
     {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      using (var form1 = new ConnectFourHome())
+      using (var form1 = new ConnectFourStartPage())
       {
         Application.Run(form1);
       }

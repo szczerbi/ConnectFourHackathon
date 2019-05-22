@@ -9,14 +9,15 @@ namespace Mediator
     public Board()
     {
       InitializeComponent();
-      this.GameBoard.Paint += new PaintEventHandler(this.Board_Paint);
+      StateController = new StateController();
+      this.GameBoard.Paint += Board_Paint;
     }
 
     private void Board_Paint(object sender, PaintEventArgs e)
     {
       Pen line = new Pen(Color.Black);
-      int lineXi = 0, lineXf = Constants.BoardWidth *SlotDiameter;
-      int lineYi = 0, lineYf = Constants.BoardHeight *SlotDiameter;
+      const int lineXi = 0, lineXf = Constants.BoardWidth * SlotDiameter;
+      const int lineYi = 0, lineYf = Constants.BoardHeight * SlotDiameter;
       var myBrush = new SolidBrush(Color.White);
 
       for (int startY = 0; startY <= Constants.BoardWidth * SlotDiameter; startY += SlotDiameter)
@@ -38,7 +39,7 @@ namespace Mediator
       }
     }
 
-    public void DrawGamePiece(object sender, MouseEventArgs e)
+    public void DrawGamePiece(Control sender, int column)
     {
       if (StateController.GameState != state.empty)
       {
@@ -47,13 +48,12 @@ namespace Mediator
 
       var color = StateController.GetCurrentPlayerColor();
       var myBrush = new SolidBrush(color);
-      int column = GetSelectedColumn(e);
       int row = StateController.GetNextAvailableRow(column);
       if (row != Invalid)
       {
         int x = column * SlotDiameter;
         int y = (Constants.BoardHeight - 1 - row) * SlotDiameter;
-        using (Graphics f = (sender as Control).CreateGraphics())
+        using (var f = sender.CreateGraphics())
         {
           f.FillEllipse(myBrush, x, y, SlotDiameter, SlotDiameter);
         }
@@ -89,11 +89,9 @@ namespace Mediator
       }
     }
 
-    protected static int GetSelectedColumn(MouseEventArgs e) => e.X / SlotDiameter;
+
 
     protected StateController StateController;
-
-
 
     public const int SlotDiameter = 100;
     public const int Invalid = -1;

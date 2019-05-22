@@ -7,12 +7,6 @@ namespace AIVsAIMediator
     public AIVsAIBoard()
     {
       InitializeComponent();
-      StateController = new AutomatedStateController();
     }
-  }
-
-  public class AutomatedStateController : Mediator.StateController
-  {
-    public AutomatedStateController() {}
   }
 }
