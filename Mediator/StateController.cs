@@ -9,22 +9,20 @@ namespace Mediator
   {
     public StateController(IPlayer player1, IPlayer player2, Board gameBoard)
     {
-      CurrentPlayer = GameSlotState.Player1;
-      WinState = Util.WinState.InPlay;
+      WinState = WinState.InPlay;
       Player1 = player1;
       Player2 = player2;
-      PlayerMap.Add(GameSlotState.Player1, Player1);
-      PlayerMap.Add(GameSlotState.Player2, Player2);
+      CurrentPlayer = Player1;
       GameBoard = gameBoard;
     }
 
     public WinState WinState { get; private set; }
 
-    public IPlayer GetCurrentPlayer() => PlayerMap[CurrentPlayer];
+    public IPlayer GetCurrentPlayer() => CurrentPlayer;
 
     public Color GetCurrentPlayerColor()
     {
-      switch (CurrentPlayer)
+      switch (GetSlotTypeToCheckFromCurrentPlayer())
       {
         case GameSlotState.Player1:
           return PlayerOneColor;
@@ -42,7 +40,7 @@ namespace Mediator
       var row = GetNextAvailableRow(column);
       if (row != Constants.Invalid)
       {
-        _boardState[column, row] = CurrentPlayer;
+        _boardState[column, row] = GetSlotTypeToCheckFromCurrentPlayer();
         GameBoard.DrawGamePiece(column, row);
         WinState = CheckForEndGame();
         if (WinState == WinState.InPlay)
@@ -61,13 +59,13 @@ namespace Mediator
 
     private void UpdateCurrentState()
     {
-      if (CurrentPlayer == GameSlotState.Player1)
+      if (CurrentPlayer == Player1)
       {
-        CurrentPlayer = GameSlotState.Player2;
+        CurrentPlayer = Player2;
       }
       else
       {
-        CurrentPlayer = GameSlotState.Player1;
+        CurrentPlayer = Player1;
       }
     }
 
@@ -86,15 +84,24 @@ namespace Mediator
       }
     }
 
-    public WinState CheckForEndGame() => Referee.CheckForWin(_boardState, CurrentPlayer);
+    private GameSlotState GetSlotTypeToCheckFromCurrentPlayer()
+    {
+      if (CurrentPlayer == Player1)
+      {
+        return GameSlotState.Player1;
+      }
+
+      return GameSlotState.Player2;
+    }
+
+    public WinState CheckForEndGame() => Referee.CheckForWin(_boardState, GetSlotTypeToCheckFromCurrentPlayer());
 
     private readonly IPlayer Player1;
     private readonly IPlayer Player2;
 
     protected readonly GameSlotState[,] _boardState = new GameSlotState[Constants.BoardWidth, Constants.BoardHeight];
-    private readonly Dictionary<GameSlotState, IPlayer> PlayerMap = new Dictionary<GameSlotState, IPlayer>();
 
-    private GameSlotState CurrentPlayer;
+    private IPlayer CurrentPlayer;
     private Board GameBoard;
 
     public static readonly Color PlayerOneColor = Color.Red;
