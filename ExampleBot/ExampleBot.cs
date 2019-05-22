@@ -11,7 +11,7 @@ namespace ExampleBot
   public class ExampleBot : IArtificialPlayer
   {
     public string PlayerName => "Awesome Example Bot";
-    public int GetNextMove(GameState[,] currentBoard)
+    public int GetNextMove(GameSlotState[,] currentBoard)
     {
       return 0;
     }

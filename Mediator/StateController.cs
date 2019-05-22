@@ -9,16 +9,16 @@ namespace Mediator
   {
     public StateController(IPlayer player1, IPlayer player2, Board gameBoard)
     {
-      CurrentPlayer = Util.GameState.Player1;
-      GameState = Util.GameState.Empty;
+      CurrentPlayer = GameSlotState.Player1;
+      WinState = Util.WinState.InPlay;
       Player1 = player1;
       Player2 = player2;
-      PlayerMap.Add(Util.GameState.Player1, Player1);
-      PlayerMap.Add(Util.GameState.Player2, Player2);
+      PlayerMap.Add(GameSlotState.Player1, Player1);
+      PlayerMap.Add(GameSlotState.Player2, Player2);
       GameBoard = gameBoard;
     }
 
-    public GameState GameState { get; private set; }
+    public WinState WinState { get; private set; }
 
     public IPlayer GetCurrentPlayer() => PlayerMap[CurrentPlayer];
 
@@ -26,48 +26,48 @@ namespace Mediator
     {
       switch (CurrentPlayer)
       {
-        case GameState.Player1:
+        case GameSlotState.Player1:
           return PlayerOneColor;
-        case GameState.Player2:
+        case GameSlotState.Player2:
           return PlayerTwoColor;
         default:
           return Color.Black;
       }
     }
 
-    public int GetNextAvailableRow(int column) => Referee.GetNextAvailableRow(_boardState, column);
+    public int GetNextAvailableRow(int column) => _boardState.GetNextAvailableRow(column);
 
-    public GameState PlacePiece(int column)
+    public WinState PlacePiece(int column)
     {
       var row = GetNextAvailableRow(column);
       if (row != Constants.Invalid)
       {
         _boardState[column, row] = CurrentPlayer;
         GameBoard.DrawGamePiece(column, row);
-        GameState = CheckForEndGame();
-        if (GameState == GameState.Empty)
+        WinState = CheckForEndGame();
+        if (WinState == WinState.InPlay)
         {
           UpdateCurrentState();
           GetNextBotMove();
         }
         else
         {
-          GameBoard.HandleWinState(GameState);
+          GameBoard.HandleWinState(WinState);
         }
       }
 
-      return GameState;
+      return WinState;
     }
 
     private void UpdateCurrentState()
     {
-      if (CurrentPlayer == GameState.Player1)
+      if (CurrentPlayer == GameSlotState.Player1)
       {
-        CurrentPlayer = GameState.Player2;
+        CurrentPlayer = GameSlotState.Player2;
       }
       else
       {
-        CurrentPlayer = GameState.Player1;
+        CurrentPlayer = GameSlotState.Player1;
       }
     }
 
@@ -79,21 +79,22 @@ namespace Mediator
         int column = currentBot.GetNextMove(_boardState);
         if (_boardState.CheckIfValidMove(column))
         {
+          // waiting here because bots play super fast and it's easier to follow this way
           System.Threading.Thread.Sleep(500);
           PlacePiece(column);
         }
       }
     }
 
-    public GameState CheckForEndGame() => Referee.CheckForWin(_boardState, CurrentPlayer);
+    public WinState CheckForEndGame() => Referee.CheckForWin(_boardState, CurrentPlayer);
 
     private readonly IPlayer Player1;
     private readonly IPlayer Player2;
 
-    protected readonly GameState[,] _boardState = new GameState[Constants.BoardWidth, Constants.BoardHeight];
-    private readonly Dictionary<GameState, IPlayer> PlayerMap = new Dictionary<GameState, IPlayer>();
+    protected readonly GameSlotState[,] _boardState = new GameSlotState[Constants.BoardWidth, Constants.BoardHeight];
+    private readonly Dictionary<GameSlotState, IPlayer> PlayerMap = new Dictionary<GameSlotState, IPlayer>();
 
-    private GameState CurrentPlayer;
+    private GameSlotState CurrentPlayer;
     private Board GameBoard;
 
     public static readonly Color PlayerOneColor = Color.Red;
