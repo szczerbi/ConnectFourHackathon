@@ -19,6 +19,8 @@ namespace Mediator
 
     public state GameState { get; private set; }
 
+    public IPlayer GetPlayer(state player) => PlayerMap[player];
+
     public IPlayer GetCurrentPlayer() => PlayerMap[CurrentPlayer];
 
     public Color GetCurrentPlayerColor()
@@ -69,12 +71,8 @@ namespace Mediator
       {
         CurrentPlayer = state.player1;
       }
-      //TODO ask bot for next move here
       var bot = GetCurrentPlayer() as IArtificialPlayer;
-      if (bot != null)
-      {
-        bot.GetNextMove(_board);
-      }
+      bot?.GetNextMove(_board);
     }
 
     public state CheckForEndGame()

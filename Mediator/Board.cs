@@ -68,7 +68,7 @@ namespace Mediator
       }
     }
 
-    private static void HandleWinState(state winState)
+    private void HandleWinState(state winState)
     {
       string message;
       switch (winState)
@@ -77,10 +77,8 @@ namespace Mediator
           message = "Game Over! It's a draw.";
           break;
         case state.player1:
-          message = "Red Player wins the game!";
-          break;
         case state.player2:
-          message = "Yellow Player wins the game!";
+          message = $"{StateController.GetCurrentPlayer().PlayerName} ({StateController.GetCurrentPlayerColor().Name}) wins the game!";
           break;
         default:
           message = string.Empty;
