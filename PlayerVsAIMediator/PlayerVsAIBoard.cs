@@ -22,15 +22,15 @@ namespace PlayerVsAIMediator
 
     protected override void InitStateController()
     {
-      StateController = new StateController(new HumanPlayer(), new HumanPlayer());
+      StateController = new StateController(new HumanPlayer(), new ExampleBot.ExampleBot(), this);
     }
 
     private void Board_MouseClick(object sender, MouseEventArgs e)
     {
-      if (StateController.GetCurrentPlayer() is HumanPlayer)
+      if (StateController.GameState == state.empty && StateController.GetCurrentPlayer() is HumanPlayer)
       {
         int column = GetSelectedColumn(e);
-        DrawGamePiece(sender as Control, column);
+        StateController.PlacePiece(column);
       }
     }
 

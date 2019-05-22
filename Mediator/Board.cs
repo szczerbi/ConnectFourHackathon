@@ -15,7 +15,7 @@ namespace Mediator
 
     protected virtual void InitStateController()
     {
-      StateController = new StateController(null, null);
+      StateController = new StateController(null, null, this);
     }
 
     private void Board_Paint(object sender, PaintEventArgs e)
@@ -44,7 +44,7 @@ namespace Mediator
       }
     }
 
-    public void DrawGamePiece(Control sender, int column)
+    public void DrawGamePiece(int column, int row)
     {
       if (StateController.GameState != state.empty)
       {
@@ -53,22 +53,15 @@ namespace Mediator
 
       var color = StateController.GetCurrentPlayerColor();
       var myBrush = new SolidBrush(color);
-      int row = StateController.GetNextAvailableRow(column);
-      if (row != Invalid)
+      int x = column * SlotDiameter;
+      int y = (Constants.BoardHeight - 1 - row) * SlotDiameter;
+      using (var f = GameBoard.CreateGraphics())
       {
-        int x = column * SlotDiameter;
-        int y = (Constants.BoardHeight - 1 - row) * SlotDiameter;
-        using (var f = sender.CreateGraphics())
-        {
-          f.FillEllipse(myBrush, x, y, SlotDiameter, SlotDiameter);
-        }
-
-        var winState = StateController.PlacePiece(column, row);
-        HandleWinState(winState);
+        f.FillEllipse(myBrush, x, y, SlotDiameter, SlotDiameter);
       }
     }
 
-    private void HandleWinState(state winState)
+    public void HandleWinState(state winState)
     {
       string message;
       switch (winState)
@@ -95,6 +88,5 @@ namespace Mediator
     public StateController StateController;
 
     public const int SlotDiameter = 100;
-    public const int Invalid = -1;
   }
 }

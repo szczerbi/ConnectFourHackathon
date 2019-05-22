@@ -8,12 +8,12 @@ using Util;
 
 namespace ExampleBot
 {
-    public class ExampleBot : IArtificialPlayer
+  public class ExampleBot : IArtificialPlayer
+  {
+    public string PlayerName => "Awesome Example Bot";
+    public int GetNextMove(state[,] currentBoard)
     {
-      public string PlayerName => "Awesome Example Bot";
-      public int GetNextMove(state[,] currentBoard)
-      {
-        throw new NotImplementedException();
-      }
+      return 0;
     }
+  }
 }

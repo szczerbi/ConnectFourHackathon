@@ -7,7 +7,7 @@ namespace Mediator
 {
   public class StateController
   {
-    public StateController(IPlayer player1, IPlayer player2)
+    public StateController(IPlayer player1, IPlayer player2, Board gameBoard)
     {
       CurrentPlayer = state.player1;
       GameState = state.empty;
@@ -15,11 +15,10 @@ namespace Mediator
       Player2 = player2;
       PlayerMap.Add(state.player1, Player1);
       PlayerMap.Add(state.player2, Player2);
+      GameBoard = gameBoard;
     }
 
     public state GameState { get; private set; }
-
-    public IPlayer GetPlayer(state player) => PlayerMap[player];
 
     public IPlayer GetCurrentPlayer() => PlayerMap[CurrentPlayer];
 
@@ -36,26 +35,25 @@ namespace Mediator
       }
     }
 
-    public int GetNextAvailableRow(int column)
+    public int GetNextAvailableRow(int column) => Referee.GetNextAvailableRow(_boardState, column);
+
+    public state PlacePiece(int column)
     {
-      for (int row = 0; row < Constants.BoardHeight; row++)
+      var row = GetNextAvailableRow(column);
+      if (row != Constants.Invalid)
       {
-        if (_board[column, row] == state.empty)
+        _boardState[column, row] = CurrentPlayer;
+        GameBoard.DrawGamePiece(column, row);
+        GameState = CheckForEndGame();
+        if (GameState == state.empty)
         {
-          return row;
+          UpdateCurrentState();
+          GetNextBotMove();
         }
-      }
-
-      return -1;
-    }
-
-    public state PlacePiece(int column, int row)
-    {
-      _board[column, row] = CurrentPlayer;
-      GameState = CheckForEndGame();
-      if (GameState == state.empty)
-      {
-        UpdateCurrentState();
+        else
+        {
+          GameBoard.HandleWinState(GameState);
+        }
       }
 
       return GameState;
@@ -71,73 +69,31 @@ namespace Mediator
       {
         CurrentPlayer = state.player1;
       }
-      var bot = GetCurrentPlayer() as IArtificialPlayer;
-      bot?.GetNextMove(_board);
     }
 
-    public state CheckForEndGame()
+    private void GetNextBotMove()
     {
-      // horizontalCheck
-      for (int j = 0; j < Constants.BoardHeight - 3; j++)
+      var currentBot = GetCurrentPlayer() as IArtificialPlayer;
+      if (currentBot != null)
       {
-        for (int i = 0; i < Constants.BoardWidth; i++)
+        int column = currentBot.GetNextMove(_boardState);
+        if (_boardState.CheckIfValidMove(column))
         {
-          if (_board[i,j] == CurrentPlayer && _board[i, j + 1] == CurrentPlayer && _board[i, j + 2] == CurrentPlayer && _board[i, j + 3] == CurrentPlayer)
-          {
-            return CurrentPlayer;
-          }
+          PlacePiece(column);
         }
       }
-      // verticalCheck
-      for (int i = 0; i < Constants.BoardWidth - 3; i++)
-      {
-        for (int j = 0; j < Constants.BoardHeight; j++)
-        {
-          if (_board[i, j] == CurrentPlayer && _board[i + 1,j] == CurrentPlayer && _board[i + 2, j] == CurrentPlayer && _board[i + 3, j] == CurrentPlayer)
-          {
-            return CurrentPlayer;
-          }
-        }
-      }
-      // ascendingDiagonalCheck
-      for (int i = 3; i < Constants.BoardWidth; i++)
-      {
-        for (int j = 0; j < Constants.BoardHeight - 3; j++)
-        {
-          if (_board[i, j] == CurrentPlayer && _board[i - 1, j + 1] == CurrentPlayer && _board[i - 2, j + 2] == CurrentPlayer && _board[i - 3, j + 3] == CurrentPlayer)
-            return CurrentPlayer;
-        }
-      }
-      // descendingDiagonalCheck
-      for (int i = 3; i < Constants.BoardWidth; i++)
-      {
-        for (int j = 3; j < Constants.BoardHeight; j++)
-        {
-          if (_board[i, j] == CurrentPlayer && _board[i - 1, j - 1] == CurrentPlayer && _board[i - 2, j - 2] == CurrentPlayer && _board[i - 3, j - 3] == CurrentPlayer)
-            return CurrentPlayer;
-        }
-      }
-      // board full check
-      var winState = state.draw;
-      foreach (var state in _board)
-      {
-        if (state == state.empty)
-        {
-          winState = state.empty;
-          break;
-        }
-      }
-
-      return winState;
     }
+
+    public state CheckForEndGame() => Referee.CheckForWin(_boardState, CurrentPlayer);
 
     private readonly IPlayer Player1;
     private readonly IPlayer Player2;
 
-    protected state[,] _board = new state[Constants.BoardWidth, Constants.BoardHeight];
-    private Dictionary<state, IPlayer> PlayerMap = new Dictionary<state, IPlayer>();
+    protected readonly state[,] _boardState = new state[Constants.BoardWidth, Constants.BoardHeight];
+    private readonly Dictionary<state, IPlayer> PlayerMap = new Dictionary<state, IPlayer>();
 
     private state CurrentPlayer;
+    private Board GameBoard;
 
     public static readonly Color PlayerOneColor = Color.Red;
     public static readonly Color PlayerTwoColor = Color.Yellow;

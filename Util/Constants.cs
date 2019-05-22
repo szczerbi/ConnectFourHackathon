@@ -18,5 +18,6 @@
   {
     public const int BoardWidth = 7;
     public const int BoardHeight = 6;
+    public const int Invalid = -1;
   }
 }
