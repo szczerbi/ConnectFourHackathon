@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Drawing;
+using System.Threading;
 using Player;
-using System.Drawing;
 using Util;
 
 namespace Mediator
@@ -80,7 +80,7 @@ namespace Mediator
         if (_boardState.CheckIfValidMove(column))
         {
           // waiting here because bots play super fast and it's easier to follow this way
-          System.Threading.Thread.Sleep(500);
+          Thread.Sleep(500);
           PlacePiece(column);
         }
       }
@@ -96,10 +96,10 @@ namespace Mediator
       return GameSlotState.Player2;
     }
 
-    private Board GameBoard;
     private IPlayer CurrentPlayer;
     private readonly IPlayer Player1;
     private readonly IPlayer Player2;
+    private readonly Board GameBoard;
 
     private readonly GameSlotState[,] _boardState = new GameSlotState[Constants.BoardWidth, Constants.BoardHeight];
 

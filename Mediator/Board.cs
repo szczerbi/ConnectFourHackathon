@@ -10,7 +10,7 @@ namespace Mediator
     {
       InitializeComponent();
       InitStateController();
-      this.GameBoard.Paint += Board_Paint;
+      GameBoard.Paint += Board_Paint;
     }
 
     protected virtual void InitStateController()
@@ -71,7 +71,8 @@ namespace Mediator
           break;
         case WinState.Player1:
         case WinState.Player2:
-          message = $"{StateController.GetCurrentPlayer().PlayerName} ({StateController.GetCurrentPlayerColor().Name}) wins the game!";
+          message =
+            $"{StateController.GetCurrentPlayer().PlayerName} ({StateController.GetCurrentPlayerColor().Name}) wins the game!";
           break;
         default:
           message = string.Empty;

@@ -1,15 +1,9 @@
-﻿using System.Windows.Forms;
-using Player;
-using Util;
+﻿using Player;
 
 namespace PlayerVsAIMediator
 {
   public class HumanPlayer : IPlayer
   {
-    public HumanPlayer()
-    {
-    }
-
     public string PlayerName => "Human";
   }
 }

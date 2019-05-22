@@ -5,7 +5,7 @@ namespace Player
   public interface IArtificialPlayer : IPlayer
   {
     /// <summary>
-    /// Returns the column index of the player's next move, given the current board state.
+    ///   Returns the column index of the player's next move, given the current board state.
     /// </summary>
     /// <param name="currentBoard">
     ///   uniform 2d array representing the board. 0,0 is the top left corner of the board.

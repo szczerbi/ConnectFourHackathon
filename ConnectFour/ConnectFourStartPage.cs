@@ -1,8 +1,8 @@
-﻿using AIVsAIMediator;
+﻿using System;
+using System.Windows.Forms;
+using AIVsAIMediator;
 using Mediator;
 using PlayerVsAIMediator;
-using System;
-using System.Windows.Forms;
 
 namespace ConnectFour
 {

@@ -1,7 +1,7 @@
-﻿using Mediator;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using Mediator;
 using Util;
 
 namespace PlayerVsAIMediator
@@ -13,7 +13,8 @@ namespace PlayerVsAIMediator
       InitializeComponent();
       GameBoard.MouseMove += Board_MouseHover;
       GameBoard.MouseClick += Board_MouseClick;
-      var imgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("PlayerVsAIMediator.Resources.arrow_icon.png");
+      var imgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream
+        ("PlayerVsAIMediator.Resources.arrow_icon.png");
       if (imgStream != null)
       {
         ArrowIcon = new Bitmap(imgStream);

@@ -6,7 +6,7 @@
     Player1,
     Player2,
     Draw
-  };
+  }
 
   public enum GameSlotState
   {
