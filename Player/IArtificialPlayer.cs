@@ -15,6 +15,6 @@ namespace Player
     ///   integer index of the column the player would like to put a piece in.
     ///   if the column is invalid (full or out of bounds), GetNextMove will be called again on the same player.
     /// </returns>
-    int GetNextMove(state[,] currentBoard);
+    int GetNextMove(GameState[,] currentBoard);
   }
 }

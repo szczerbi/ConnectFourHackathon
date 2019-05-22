@@ -4,7 +4,7 @@ namespace Mediator
 {
   public static class Referee
   {
-    public static state CheckForWin(state[,] board, state currentPlayer)
+    public static GameState CheckForWin(GameState[,] board, GameState currentPlayer)
     {
       // horizontalCheck
       for (int j = 0; j < Constants.BoardHeight - 3; j++)
@@ -47,12 +47,12 @@ namespace Mediator
         }
       }
       // board full check
-      var winState = state.draw;
+      var winState = GameState.draw;
       foreach (var state in board)
       {
-        if (state == state.empty)
+        if (state == GameState.empty)
         {
-          winState = state.empty;
+          winState = GameState.empty;
           break;
         }
       }
@@ -60,11 +60,11 @@ namespace Mediator
       return winState;
     }
 
-    public static int GetNextAvailableRow(this state[,] board, int column)
+    public static int GetNextAvailableRow(this GameState[,] board, int column)
     {
       for (int row = 0; row < Constants.BoardHeight; row++)
       {
-        if (board[column, row] == state.empty)
+        if (board[column, row] == GameState.empty)
         {
           return row;
         }
@@ -73,7 +73,7 @@ namespace Mediator
       return Constants.Invalid;
     }
 
-    public static bool CheckIfValidMove(this state[,] board, int column) =>
+    public static bool CheckIfValidMove(this GameState[,] board, int column) =>
       column >= 0 && column < Constants.BoardWidth && GetNextAvailableRow(board, column) != Constants.Invalid;
   }
 }

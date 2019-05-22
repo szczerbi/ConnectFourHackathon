@@ -9,16 +9,16 @@ namespace Mediator
   {
     public StateController(IPlayer player1, IPlayer player2, Board gameBoard)
     {
-      CurrentPlayer = state.player1;
-      GameState = state.empty;
+      CurrentPlayer = Util.GameState.player1;
+      GameState = Util.GameState.empty;
       Player1 = player1;
       Player2 = player2;
-      PlayerMap.Add(state.player1, Player1);
-      PlayerMap.Add(state.player2, Player2);
+      PlayerMap.Add(Util.GameState.player1, Player1);
+      PlayerMap.Add(Util.GameState.player2, Player2);
       GameBoard = gameBoard;
     }
 
-    public state GameState { get; private set; }
+    public GameState GameState { get; private set; }
 
     public IPlayer GetCurrentPlayer() => PlayerMap[CurrentPlayer];
 
@@ -26,9 +26,9 @@ namespace Mediator
     {
       switch (CurrentPlayer)
       {
-        case state.player1:
+        case GameState.player1:
           return PlayerOneColor;
-        case state.player2:
+        case GameState.player2:
           return PlayerTwoColor;
         default:
           return Color.Black;
@@ -37,7 +37,7 @@ namespace Mediator
 
     public int GetNextAvailableRow(int column) => Referee.GetNextAvailableRow(_boardState, column);
 
-    public state PlacePiece(int column)
+    public GameState PlacePiece(int column)
     {
       var row = GetNextAvailableRow(column);
       if (row != Constants.Invalid)
@@ -45,7 +45,7 @@ namespace Mediator
         _boardState[column, row] = CurrentPlayer;
         GameBoard.DrawGamePiece(column, row);
         GameState = CheckForEndGame();
-        if (GameState == state.empty)
+        if (GameState == GameState.empty)
         {
           UpdateCurrentState();
           GetNextBotMove();
@@ -61,13 +61,13 @@ namespace Mediator
 
     private void UpdateCurrentState()
     {
-      if (CurrentPlayer == state.player1)
+      if (CurrentPlayer == GameState.player1)
       {
-        CurrentPlayer = state.player2;
+        CurrentPlayer = GameState.player2;
       }
       else
       {
-        CurrentPlayer = state.player1;
+        CurrentPlayer = GameState.player1;
       }
     }
 
@@ -85,15 +85,15 @@ namespace Mediator
       }
     }
 
-    public state CheckForEndGame() => Referee.CheckForWin(_boardState, CurrentPlayer);
+    public GameState CheckForEndGame() => Referee.CheckForWin(_boardState, CurrentPlayer);
 
     private readonly IPlayer Player1;
     private readonly IPlayer Player2;
 
-    protected readonly state[,] _boardState = new state[Constants.BoardWidth, Constants.BoardHeight];
-    private readonly Dictionary<state, IPlayer> PlayerMap = new Dictionary<state, IPlayer>();
+    protected readonly GameState[,] _boardState = new GameState[Constants.BoardWidth, Constants.BoardHeight];
+    private readonly Dictionary<GameState, IPlayer> PlayerMap = new Dictionary<GameState, IPlayer>();
 
-    private state CurrentPlayer;
+    private GameState CurrentPlayer;
     private Board GameBoard;
 
     public static readonly Color PlayerOneColor = Color.Red;

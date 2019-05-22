@@ -1,6 +1,6 @@
 ﻿namespace Util
 {
-  public enum state
+  public enum GameState
   {
     empty,
     player1,

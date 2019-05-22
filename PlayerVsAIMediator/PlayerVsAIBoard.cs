@@ -27,7 +27,7 @@ namespace PlayerVsAIMediator
 
     private void Board_MouseClick(object sender, MouseEventArgs e)
     {
-      if (StateController.GameState == state.empty && StateController.GetCurrentPlayer() is HumanPlayer)
+      if (StateController.GameState == GameState.empty && StateController.GetCurrentPlayer() is HumanPlayer)
       {
         int column = GetSelectedColumn(e);
         StateController.PlacePiece(column);
@@ -36,7 +36,7 @@ namespace PlayerVsAIMediator
 
     private void Board_MouseHover(object sender, MouseEventArgs e)
     {
-      if (StateController.GameState != state.empty || !(StateController.GetCurrentPlayer() is HumanPlayer))
+      if (StateController.GameState != GameState.empty || !(StateController.GetCurrentPlayer() is HumanPlayer))
       {
         return;
       }
