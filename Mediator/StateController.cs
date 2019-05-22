@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using System.Collections.Generic;
+using Player;
 using System.Drawing;
 using Util;
 
@@ -12,22 +13,13 @@ namespace Mediator
       GameState = state.empty;
       Player1 = player1;
       Player2 = player2;
+      PlayerMap.Add(state.player1, Player1);
+      PlayerMap.Add(state.player2, Player2);
     }
 
     public state GameState { get; private set; }
 
-    public IPlayer GetCurrentPlayer()
-    {
-      switch (CurrentPlayer)
-      {
-        case state.player1:
-          return Player1;
-        case state.player2:
-          return Player2;
-        default:
-          return null;
-      }
-    }
+    public IPlayer GetCurrentPlayer() => PlayerMap[CurrentPlayer];
 
     public Color GetCurrentPlayerColor()
     {
@@ -78,6 +70,11 @@ namespace Mediator
         CurrentPlayer = state.player1;
       }
       //TODO ask bot for next move here
+      var bot = GetCurrentPlayer() as IArtificialPlayer;
+      if (bot != null)
+      {
+        bot.GetNextMove(_board);
+      }
     }
 
     public state CheckForEndGame()
@@ -139,7 +136,8 @@ namespace Mediator
     private readonly IPlayer Player1;
     private readonly IPlayer Player2;
 
-    protected state[,] _board = new state[7, 6];
+    protected state[,] _board = new state[Constants.BoardWidth, Constants.BoardHeight];
+    private Dictionary<state, IPlayer> PlayerMap = new Dictionary<state, IPlayer>();
 
     private state CurrentPlayer;
 

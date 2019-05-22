@@ -11,6 +11,8 @@ namespace PlayerVsAIMediator
     public PlayerVsAIBoard()
     {
       InitializeComponent();
+      GameBoard.MouseMove += Board_MouseHover;
+      GameBoard.MouseClick += Board_MouseClick;
       var imgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("PlayerVsAIMediator.Resources.arrow_icon.png");
       if (imgStream != null)
       {
@@ -20,20 +22,46 @@ namespace PlayerVsAIMediator
 
     protected override void InitStateController()
     {
-      StateController = new StateController(new HumanPlayer(this), new HumanPlayer(this));
+      StateController = new StateController(new HumanPlayer(), new HumanPlayer());
     }
 
-    public void DrawArrow(int column)
+    private void Board_MouseClick(object sender, MouseEventArgs e)
+    {
+      if (StateController.GetCurrentPlayer() is HumanPlayer)
+      {
+        int column = GetSelectedColumn(e);
+        DrawGamePiece(sender as Control, column);
+      }
+    }
+
+    private void Board_MouseHover(object sender, MouseEventArgs e)
+    {
+      if (StateController.GameState != state.empty || !(StateController.GetCurrentPlayer() is HumanPlayer))
+      {
+        return;
+      }
+
+      int column = GetSelectedColumn(e);
+      if (column != _currentHoverColumn)
+      {
+        DrawArrow(column);
+        _currentHoverColumn = column;
+      }
+    }
+
+    private void DrawArrow(int column)
     {
       using (Graphics f = CreateGraphics())
       {
-        f.Clear(Color.Transparent);
+        f.Clear(BackColor);
         f.DrawImage(ArrowIcon, column * SlotDiameter, 0);
       }
     }
 
-    public static int GetSelectedColumn(MouseEventArgs e) => e.X / SlotDiameter;
+    private static int GetSelectedColumn(MouseEventArgs e) => e.X / SlotDiameter;
 
     private Image ArrowIcon { get; }
+
+    private int _currentHoverColumn = -1;
   }
 }

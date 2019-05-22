@@ -8,7 +8,5 @@ namespace Player
     /// unique identifier for this player
     /// </summary>
     string PlayerName { get; }
-
-    PlayerType Type { get; }
   }
 }
