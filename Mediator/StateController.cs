@@ -79,6 +79,7 @@ namespace Mediator
         int column = currentBot.GetNextMove(_boardState);
         if (_boardState.CheckIfValidMove(column))
         {
+          System.Threading.Thread.Sleep(500);
           PlacePiece(column);
         }
       }
