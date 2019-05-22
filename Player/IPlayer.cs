@@ -1,10 +1,14 @@
-﻿using System.Drawing;
-using Util;
+﻿using Util;
 
 namespace Player
 {
   public interface IPlayer
   {
-    Point GetNextMove(state[][] currentBoard);
+    /// <summary>
+    /// unique identifier for this player
+    /// </summary>
+    string PlayerName { get; }
+
+    PlayerType Type { get; }
   }
 }

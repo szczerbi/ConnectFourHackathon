@@ -35,9 +35,9 @@ namespace Mediator
       this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
       this.SuspendLayout();
-      // 
+      //
       // GameBoard
-      // 
+      //
       this.GameBoard.BackColor = System.Drawing.Color.Blue;
       this.GameBoard.ColumnCount = 7;
       this.GameBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
@@ -58,9 +58,9 @@ namespace Mediator
       this.GameBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
       this.GameBoard.Size = new System.Drawing.Size(700, 600);
       this.GameBoard.TabIndex = 0;
-      // 
+      //
       // Board
-      // 
+      //
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(701, 701);
@@ -74,7 +74,7 @@ namespace Mediator
 
     #endregion
 
-    protected System.Windows.Forms.TableLayoutPanel GameBoard;
+    public System.Windows.Forms.TableLayoutPanel GameBoard;
     private System.Windows.Forms.BindingSource bindingSource1;
   }
 }

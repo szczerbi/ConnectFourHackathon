@@ -1,17 +1,33 @@
-﻿using System.Drawing;
+﻿using Player;
+using System.Drawing;
 using Util;
 
 namespace Mediator
 {
   public class StateController
   {
-    public StateController()
+    public StateController(IPlayer player1, IPlayer player2)
     {
       CurrentPlayer = state.player1;
       GameState = state.empty;
+      Player1 = player1;
+      Player2 = player2;
     }
 
     public state GameState { get; private set; }
+
+    public IPlayer GetCurrentPlayer()
+    {
+      switch (CurrentPlayer)
+      {
+        case state.player1:
+          return Player1;
+        case state.player2:
+          return Player2;
+        default:
+          return null;
+      }
+    }
 
     public Color GetCurrentPlayerColor()
     {
@@ -61,6 +77,7 @@ namespace Mediator
       {
         CurrentPlayer = state.player1;
       }
+      //TODO ask bot for next move here
     }
 
     public state CheckForEndGame()
@@ -119,6 +136,8 @@ namespace Mediator
       return winState;
     }
 
+    private readonly IPlayer Player1;
+    private readonly IPlayer Player2;
 
     protected state[,] _board = new state[7, 6];
 

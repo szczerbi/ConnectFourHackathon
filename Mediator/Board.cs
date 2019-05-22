@@ -9,8 +9,13 @@ namespace Mediator
     public Board()
     {
       InitializeComponent();
-      StateController = new StateController();
+      InitStateController();
       this.GameBoard.Paint += Board_Paint;
+    }
+
+    protected virtual void InitStateController()
+    {
+      StateController = new StateController(null, null);
     }
 
     private void Board_Paint(object sender, PaintEventArgs e)
@@ -89,9 +94,7 @@ namespace Mediator
       }
     }
 
-
-
-    protected StateController StateController;
+    public StateController StateController;
 
     public const int SlotDiameter = 100;
     public const int Invalid = -1;

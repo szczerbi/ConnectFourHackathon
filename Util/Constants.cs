@@ -1,6 +1,18 @@
 ﻿namespace Util
 {
-  public enum state { empty = 0, player1 = 1, player2 = 2, draw = 3 };
+  public enum state
+  {
+    empty,
+    player1,
+    player2,
+    draw
+  };
+
+  public enum PlayerType
+  {
+    Human,
+    Bot
+  };
 
   public static class Constants
   {
