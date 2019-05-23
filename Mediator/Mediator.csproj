@@ -61,7 +61,6 @@
     <Compile Include="GameWin.Designer.cs">
       <DependentUpon>GameWin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Referee.cs" />
     <Compile Include="StateController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Board.resx">
