@@ -13,12 +13,6 @@ namespace PlayerVsAIMediator
       InitializeComponent();
       GameBoard.MouseMove += Board_MouseHover;
       GameBoard.MouseClick += Board_MouseClick;
-      var imgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream
-        ("PlayerVsAIMediator.Resources.arrow_icon.png");
-      if (imgStream != null)
-      {
-        ArrowIcon = new Bitmap(imgStream);
-      }
     }
 
     protected override void InitStateController()
@@ -50,18 +44,7 @@ namespace PlayerVsAIMediator
       }
     }
 
-    private void DrawArrow(int column)
-    {
-      using (Graphics f = CreateGraphics())
-      {
-        f.Clear(BackColor);
-        f.DrawImage(ArrowIcon, column * SlotDiameter, 0);
-      }
-    }
-
     private static int GetSelectedColumn(MouseEventArgs e) => e.X / SlotDiameter;
-
-    private Image ArrowIcon { get; }
 
     private int _currentHoverColumn = -1;
   }
