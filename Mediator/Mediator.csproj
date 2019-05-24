@@ -61,7 +61,6 @@
     <Compile Include="GameWin.Designer.cs">
       <DependentUpon>GameWin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Referee.cs" />
     <Compile Include="StateController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Board.resx">
@@ -101,6 +100,9 @@
       <Project>{C3262F33-0BF1-46C8-BF50-DF30B8E0A41C}</Project>
       <Name>Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\arrow_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

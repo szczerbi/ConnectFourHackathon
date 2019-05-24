@@ -1,6 +1,4 @@
-﻿using Util;
-
-namespace Mediator
+﻿namespace Util
 {
   public static class Referee
   {

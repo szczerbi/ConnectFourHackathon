@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 using Util;
 
@@ -11,6 +12,11 @@ namespace Mediator
       InitializeComponent();
       InitStateController();
       GameBoard.Paint += Board_Paint;
+      var imgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Mediator.Resources.arrow_icon.png");
+      if (imgStream != null)
+      {
+        ArrowIcon = new Bitmap(imgStream);
+      }
     }
 
     protected virtual void InitStateController()
@@ -83,6 +89,17 @@ namespace Mediator
       {
         var gameWin = new GameWin(message);
         gameWin.Show();
+      }
+    }
+
+    private Image ArrowIcon { get; }
+
+    protected void DrawArrow(int column)
+    {
+      using (Graphics f = CreateGraphics())
+      {
+        f.Clear(BackColor);
+        f.DrawImage(ArrowIcon, column * SlotDiameter, 0);
       }
     }
 
