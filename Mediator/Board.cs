@@ -71,10 +71,10 @@ namespace Mediator
         case WinState.Draw:
           message = "Game Over! It's a draw.";
           break;
-        case WinState.Player1:
-        case WinState.Player2:
+        case WinState.Win:
+          var currentPlayer = StateController.GetCurrentPlayer();
           message =
-            $"{StateController.GetCurrentPlayer().PlayerName} ({StateController.GetCurrentPlayer().Color.Name}) wins the game!";
+            $"{currentPlayer.PlayerName} ({currentPlayer.Color.Name}) wins the game!";
           break;
         default:
           message = string.Empty;

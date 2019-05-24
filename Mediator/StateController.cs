@@ -29,7 +29,7 @@ namespace Mediator
       var row = GetNextAvailableRow(column);
       if (row != Constants.Invalid)
       {
-        _boardState[column, row] = CurrentPlayerToGameSlotState();
+        _boardState[column, row] = CurrentPlayer;
         GameBoard.DrawGamePiece(column, row);
         WinState = CheckForEndGame();
         if (WinState == WinState.InPlay)
@@ -46,7 +46,7 @@ namespace Mediator
       return WinState;
     }
 
-    private WinState CheckForEndGame() => Referee.CheckForWin(_boardState, CurrentPlayerToGameSlotState());
+    private WinState CheckForEndGame() => Referee.CheckForWin(_boardState, CurrentPlayer);
 
     private void UpdateCurrentState()
     {
@@ -75,24 +75,11 @@ namespace Mediator
       }
     }
 
-    private GameSlotState CurrentPlayerToGameSlotState()
-    {
-      if (CurrentPlayer == Player1)
-      {
-        return GameSlotState.Player1;
-      }
-
-      return GameSlotState.Player2;
-    }
-
     private Player.Player CurrentPlayer;
     private readonly Player.Player Player1;
     private readonly Player.Player Player2;
     private readonly Board GameBoard;
 
-    private readonly GameSlotState[,] _boardState = new GameSlotState[Constants.BoardWidth, Constants.BoardHeight];
-
-    public static readonly Color PlayerOneColor = Color.Red;
-    public static readonly Color PlayerTwoColor = Color.Yellow;
+    private readonly Player.Player[,] _boardState = new Player.Player[Constants.BoardWidth, Constants.BoardHeight];
   }
 }

@@ -1,8 +1,10 @@
-﻿namespace Util
+﻿using Player;
+
+namespace Util
 {
   public static class Referee
   {
-    public static WinState CheckForWin(GameSlotState[,] board, GameSlotState currentPlayer)
+    public static WinState CheckForWin(Player.Player[,] board, Player.Player currentPlayer)
     {
       // horizontalCheck
       for (int j = 0; j < Constants.BoardHeight - 3; j++)
@@ -14,7 +16,7 @@
               && board[i, j + 2] == currentPlayer
               && board[i, j + 3] == currentPlayer)
           {
-            return currentPlayer.PlayerToWinState();
+            return WinState.Win;
           }
         }
       }
@@ -29,7 +31,7 @@
               && board[i + 2, j] == currentPlayer
               && board[i + 3, j] == currentPlayer)
           {
-            return currentPlayer.PlayerToWinState();
+            return WinState.Win;
           }
         }
       }
@@ -44,7 +46,7 @@
               && board[i - 2, j + 2] == currentPlayer
               && board[i - 3, j + 3] == currentPlayer)
           {
-            return currentPlayer.PlayerToWinState();
+            return WinState.Win;
           }
         }
       }
@@ -59,7 +61,7 @@
               && board[i - 2, j - 2] == currentPlayer
               && board[i - 3, j - 3] == currentPlayer)
           {
-            return currentPlayer.PlayerToWinState();
+            return WinState.Win;
           }
         }
       }
@@ -68,7 +70,7 @@
       var winState = WinState.Draw;
       foreach (var state in board)
       {
-        if (state == GameSlotState.Empty)
+        if (state == null)
         {
           winState = WinState.InPlay;
           break;
@@ -78,11 +80,11 @@
       return winState;
     }
 
-    public static int GetNextAvailableRow(this GameSlotState[,] board, int column)
+    public static int GetNextAvailableRow(this Player.Player[,] board, int column)
     {
       for (int row = 0; row < Constants.BoardHeight; row++)
       {
-        if (board[column, row] == GameSlotState.Empty)
+        if (board[column, row] == null)
         {
           return row;
         }
@@ -91,7 +93,7 @@
       return Constants.Invalid;
     }
 
-    public static bool CheckIfValidMove(this GameSlotState[,] board, int column) =>
+    public static bool CheckIfValidMove(this Player.Player[,] board, int column) =>
       column >= 0 && column < Constants.BoardWidth && GetNextAvailableRow(board, column) != Constants.Invalid;
   }
 }

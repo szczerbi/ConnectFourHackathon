@@ -7,11 +7,11 @@ namespace ExampleBot
   {
     public override string PlayerName => "Awesome Example Bot";
 
-    public override int GetNextMove(GameSlotState[,] currentBoard)
+    public override int GetNextMove(Player.Player[,] currentBoard)
     {
       for (int i = 0; i < Constants.BoardWidth; i++)
       {
-        if (currentBoard[i, Constants.BoardHeight - 1] == GameSlotState.Empty)
+        if (currentBoard.CheckIfValidMove(currentBoard.GetNextAvailableRow(i)))
         {
           return i;
         }
