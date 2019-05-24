@@ -32,6 +32,7 @@ namespace PlayerVsAIMediator
       {
         int column = GetSelectedColumn(e);
         StateController.PlacePiece(column);
+        DrawPreviousArrow(column);
       }
     }
 
@@ -56,6 +57,16 @@ namespace PlayerVsAIMediator
       {
         f.Clear(BackColor);
         f.DrawImage(ArrowIcon, column * SlotDiameter, 0);
+        f.DrawImage(ArrowIcon, _previousColumn * SlotDiameter, 0);
+      }
+    }
+
+    private void DrawPreviousArrow(int column)
+    {
+      using (Graphics f = CreateGraphics())
+      {
+        f.DrawImage(ArrowIcon, column * SlotDiameter, 0);
+        _previousColumn = column;
       }
     }
 
@@ -64,5 +75,6 @@ namespace PlayerVsAIMediator
     private Image ArrowIcon { get; }
 
     private int _currentHoverColumn = -1;
+    private int _previousColumn = -1;
   }
 }

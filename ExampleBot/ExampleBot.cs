@@ -9,6 +9,14 @@ namespace ExampleBot
 
     public int GetNextMove(GameSlotState[,] currentBoard)
     {
+      for (int i = 0; i < Constants.BoardWidth; i++)
+      {
+        if (currentBoard[i, Constants.BoardHeight - 1] == GameSlotState.Empty)
+        {
+          return i;
+        }
+      }
+
       return 0;
     }
   }
