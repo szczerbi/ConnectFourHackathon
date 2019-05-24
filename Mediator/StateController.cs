@@ -7,7 +7,7 @@ namespace Mediator
 {
   public class StateController
   {
-    public StateController(IPlayer player1, IPlayer player2, Board gameBoard)
+    public StateController(Player.Player player1, Player.Player player2, Board gameBoard)
     {
       WinState = WinState.InPlay;
       Player1 = player1;
@@ -18,20 +18,9 @@ namespace Mediator
 
     public WinState WinState { get; private set; }
 
-    public IPlayer GetCurrentPlayer() => CurrentPlayer;
+    public Player.Player GetCurrentPlayer() => CurrentPlayer;
 
-    public Color GetCurrentPlayerColor()
-    {
-      switch (CurrentPlayerToGameSlotState())
-      {
-        case GameSlotState.Player1:
-          return PlayerOneColor;
-        case GameSlotState.Player2:
-          return PlayerTwoColor;
-        default:
-          return Color.Black;
-      }
-    }
+    public Player.Player GetOtherPlayer() => CurrentPlayer == Player1 ? Player2 : Player1;
 
     public int GetNextAvailableRow(int column) => _boardState.GetNextAvailableRow(column);
 
@@ -73,7 +62,7 @@ namespace Mediator
 
     private void GetNextBotMove()
     {
-      var currentBot = GetCurrentPlayer() as IArtificialPlayer;
+      var currentBot = GetCurrentPlayer() as ArtificialPlayer;
       if (currentBot != null)
       {
         int column = currentBot.GetNextMove(_boardState);
@@ -96,9 +85,9 @@ namespace Mediator
       return GameSlotState.Player2;
     }
 
-    private IPlayer CurrentPlayer;
-    private readonly IPlayer Player1;
-    private readonly IPlayer Player2;
+    private Player.Player CurrentPlayer;
+    private readonly Player.Player Player1;
+    private readonly Player.Player Player2;
     private readonly Board GameBoard;
 
     private readonly GameSlotState[,] _boardState = new GameSlotState[Constants.BoardWidth, Constants.BoardHeight];

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using Mediator;
 using Util;
 
@@ -13,8 +14,12 @@ namespace PlayerVsAIMediator
       GameBoard.MouseClick += Board_MouseClick;
     }
 
-    protected override StateController BuildStateController() =>
-      new StateController(new HumanPlayer(), new ExampleBot.ExampleBot(), this);
+    protected override StateController BuildStateController()
+    {
+      var player1 = new HumanPlayer { Arrow = RedArrow, Color = Color.Red };
+      var player2 = new ExampleBot.ExampleBot { Arrow = YellowArrow, Color = Color.Yellow };
+      return new StateController(player1, player2, this);
+    }
 
     private void Board_MouseClick(object sender, MouseEventArgs e)
     {
@@ -27,7 +32,8 @@ namespace PlayerVsAIMediator
 
     private void Board_MouseHover(object sender, MouseEventArgs e)
     {
-      if (StateController.WinState != WinState.InPlay || !(StateController.GetCurrentPlayer() is HumanPlayer))
+      var currentPlayer = StateController.GetCurrentPlayer();
+      if (StateController.WinState != WinState.InPlay || !(currentPlayer is HumanPlayer))
       {
         return;
       }
@@ -35,7 +41,7 @@ namespace PlayerVsAIMediator
       int column = GetSelectedColumn(e);
       if (column != _currentHoverColumn)
       {
-        DrawArrow(column, StateController.GetCurrentPlayerColor());
+        DrawArrow(column, currentPlayer.Arrow, StateController.GetOtherPlayer().Arrow);
         _currentHoverColumn = column;
       }
     }

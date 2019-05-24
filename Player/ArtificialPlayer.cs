@@ -2,7 +2,7 @@
 
 namespace Player
 {
-  public interface IArtificialPlayer : IPlayer
+  public abstract class ArtificialPlayer : Player
   {
     /// <summary>
     ///   Returns the column index of the player's next move, given the current board state.
@@ -15,6 +15,6 @@ namespace Player
     ///   integer index of the column the player would like to put a piece in.
     ///   if the column is invalid (full or out of bounds), GetNextMove will be called again on the same player.
     /// </returns>
-    int GetNextMove(GameSlotState[,] currentBoard);
+    public abstract int GetNextMove(GameSlotState[,] currentBoard);
   }
 }

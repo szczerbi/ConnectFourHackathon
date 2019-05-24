@@ -10,8 +10,8 @@ namespace Mediator
     public Board()
     {
       InitializeComponent();
-      StateController = BuildStateController();
       InitImages();
+      StateController = BuildStateController();
       GameBoard.Paint += Board_Paint;
     }
 
@@ -52,11 +52,11 @@ namespace Mediator
         return;
       }
 
-      var color = StateController.GetCurrentPlayerColor();
-      var myBrush = new SolidBrush(color);
+      var currentPlayer = StateController.GetCurrentPlayer();
+      var myBrush = new SolidBrush(currentPlayer.Color);
       int x = column * SlotDiameter;
       int y = (Constants.BoardHeight - 1 - row) * SlotDiameter;
-      DrawPreviousArrow(column, color);
+      DrawPreviousArrow(column, currentPlayer.Arrow);
       using (var f = GameBoard.CreateGraphics())
       {
         f.FillEllipse(myBrush, x, y, SlotDiameter, SlotDiameter);
@@ -74,7 +74,7 @@ namespace Mediator
         case WinState.Player1:
         case WinState.Player2:
           message =
-            $"{StateController.GetCurrentPlayer().PlayerName} ({StateController.GetCurrentPlayerColor().Name}) wins the game!";
+            $"{StateController.GetCurrentPlayer().PlayerName} ({StateController.GetCurrentPlayer().Color.Name}) wins the game!";
           break;
         default:
           message = string.Empty;
@@ -88,17 +88,17 @@ namespace Mediator
       }
     }
 
-    private Image RedArrow { get; set; }
+    protected Image RedArrow { get; private set; }
 
-    private Image YellowArrow { get; set; }
+    protected Image YellowArrow { get; private set; }
 
-    protected void DrawArrow(int column, Color currentPlayerColor)
+    protected void DrawArrow(int column, Image currentArrow, Image previousArrow)
     {
       using (Graphics f = CreateGraphics())
       {
         f.Clear(BackColor);
-        f.DrawImage(currentPlayerColor == Color.Red ? YellowArrow : RedArrow, _previousColumn * SlotDiameter, 0);
-        f.DrawImage(currentPlayerColor == Color.Red ? RedArrow : YellowArrow, column * SlotDiameter, 0);
+        f.DrawImage(previousArrow, _previousColumn * SlotDiameter, 0);
+        f.DrawImage(currentArrow, column * SlotDiameter, 0);
       }
     }
 
@@ -117,12 +117,12 @@ namespace Mediator
       }
     }
 
-    private void DrawPreviousArrow(int column, Color color)
+    private void DrawPreviousArrow(int column, Image arrow)
     {
       using (Graphics f = CreateGraphics())
       {
         f.Clear(BackColor);
-        f.DrawImage(color == Color.Red ? RedArrow : YellowArrow, column * SlotDiameter, 0);
+        f.DrawImage(arrow, column * SlotDiameter, 0);
         _previousColumn = column;
       }
     }

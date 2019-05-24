@@ -2,8 +2,8 @@
 
 namespace PlayerVsAIMediator
 {
-  public class HumanPlayer : IPlayer
+  public class HumanPlayer : Player.Player
   {
-    public string PlayerName => "Human";
+    public override string PlayerName => "Human";
   }
 }
