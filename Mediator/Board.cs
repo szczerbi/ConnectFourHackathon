@@ -11,13 +11,11 @@ namespace Mediator
     {
       InitializeComponent();
       InitStateController();
+      InitImages();
       GameBoard.Paint += Board_Paint;
-      var imgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Mediator.Resources.arrow_icon.png");
-      if (imgStream != null)
-      {
-        ArrowIcon = new Bitmap(imgStream);
-      }
     }
+
+    public StateController StateController { get; protected set; }
 
     protected virtual void InitStateController()
     {
@@ -92,18 +90,33 @@ namespace Mediator
       }
     }
 
-    private Image ArrowIcon { get; }
+    private Image RedArrow { get; set; }
+
+    private Image YellowArrow { get; set; }
 
     protected void DrawArrow(int column)
     {
       using (Graphics f = CreateGraphics())
       {
         f.Clear(BackColor);
-        f.DrawImage(ArrowIcon, column * SlotDiameter, 0);
+        f.DrawImage(RedArrow, column * SlotDiameter, 0);
       }
     }
 
-    public StateController StateController;
+    private void InitImages()
+    {
+      var assembly = Assembly.GetExecutingAssembly();
+      var redImgStream = assembly.GetManifestResourceStream("Mediator.Resources.red_arrow.png");
+      if (redImgStream != null)
+      {
+        RedArrow = new Bitmap(redImgStream);
+      }
+      var yellowImgStream = assembly.GetManifestResourceStream("Mediator.Resources.yellow_arrow.png");
+      if (yellowImgStream != null)
+      {
+        YellowArrow = new Bitmap(yellowImgStream);
+      }
+    }
 
     public const int SlotDiameter = 100;
   }
