@@ -59,6 +59,7 @@ namespace Mediator
       var myBrush = new SolidBrush(color);
       int x = column * SlotDiameter;
       int y = (Constants.BoardHeight - 1 - row) * SlotDiameter;
+      DrawPreviousArrow(column);
       using (var f = GameBoard.CreateGraphics())
       {
         f.FillEllipse(myBrush, x, y, SlotDiameter, SlotDiameter);
@@ -100,6 +101,7 @@ namespace Mediator
       {
         f.Clear(BackColor);
         f.DrawImage(RedArrow, column * SlotDiameter, 0);
+        f.DrawImage(RedArrow, _previousColumn * SlotDiameter, 0);
       }
     }
 
@@ -118,6 +120,17 @@ namespace Mediator
       }
     }
 
+    private void DrawPreviousArrow(int column)
+    {
+      using (Graphics f = CreateGraphics())
+      {
+        f.Clear(BackColor);
+        f.DrawImage(RedArrow, column * SlotDiameter, 0);
+        _previousColumn = column;
+      }
+    }
+
     public const int SlotDiameter = 100;
+    private int _previousColumn = -1;
   }
 }
