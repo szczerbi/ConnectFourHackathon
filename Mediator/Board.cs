@@ -10,17 +10,14 @@ namespace Mediator
     public Board()
     {
       InitializeComponent();
-      InitStateController();
+      StateController = BuildStateController();
       InitImages();
       GameBoard.Paint += Board_Paint;
     }
 
     public StateController StateController { get; protected set; }
 
-    protected virtual void InitStateController()
-    {
-      StateController = new StateController(null, null, this);
-    }
+    protected virtual StateController BuildStateController() => new StateController(null, null, this);
 
     private void Board_Paint(object sender, PaintEventArgs e)
     {
@@ -59,7 +56,7 @@ namespace Mediator
       var myBrush = new SolidBrush(color);
       int x = column * SlotDiameter;
       int y = (Constants.BoardHeight - 1 - row) * SlotDiameter;
-      DrawPreviousArrow(column);
+      DrawPreviousArrow(column, color);
       using (var f = GameBoard.CreateGraphics())
       {
         f.FillEllipse(myBrush, x, y, SlotDiameter, SlotDiameter);
@@ -95,13 +92,13 @@ namespace Mediator
 
     private Image YellowArrow { get; set; }
 
-    protected void DrawArrow(int column)
+    protected void DrawArrow(int column, Color currentPlayerColor)
     {
       using (Graphics f = CreateGraphics())
       {
         f.Clear(BackColor);
-        f.DrawImage(RedArrow, column * SlotDiameter, 0);
-        f.DrawImage(RedArrow, _previousColumn * SlotDiameter, 0);
+        f.DrawImage(currentPlayerColor == Color.Red ? YellowArrow : RedArrow, _previousColumn * SlotDiameter, 0);
+        f.DrawImage(currentPlayerColor == Color.Red ? RedArrow : YellowArrow, column * SlotDiameter, 0);
       }
     }
 
@@ -120,12 +117,12 @@ namespace Mediator
       }
     }
 
-    private void DrawPreviousArrow(int column)
+    private void DrawPreviousArrow(int column, Color color)
     {
       using (Graphics f = CreateGraphics())
       {
         f.Clear(BackColor);
-        f.DrawImage(RedArrow, column * SlotDiameter, 0);
+        f.DrawImage(color == Color.Red ? RedArrow : YellowArrow, column * SlotDiameter, 0);
         _previousColumn = column;
       }
     }

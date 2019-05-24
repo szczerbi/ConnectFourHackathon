@@ -13,10 +13,8 @@ namespace PlayerVsAIMediator
       GameBoard.MouseClick += Board_MouseClick;
     }
 
-    protected override void InitStateController()
-    {
-      StateController = new StateController(new HumanPlayer(), new ExampleBot.ExampleBot(), this);
-    }
+    protected override StateController BuildStateController() =>
+      new StateController(new HumanPlayer(), new ExampleBot.ExampleBot(), this);
 
     private void Board_MouseClick(object sender, MouseEventArgs e)
     {
@@ -37,7 +35,7 @@ namespace PlayerVsAIMediator
       int column = GetSelectedColumn(e);
       if (column != _currentHoverColumn)
       {
-        DrawArrow(column);
+        DrawArrow(column, StateController.GetCurrentPlayerColor());
         _currentHoverColumn = column;
       }
     }
