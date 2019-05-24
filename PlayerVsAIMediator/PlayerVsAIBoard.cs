@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Reflection;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Mediator;
 using Util;
 
@@ -26,7 +24,6 @@ namespace PlayerVsAIMediator
       {
         int column = GetSelectedColumn(e);
         StateController.PlacePiece(column);
-        DrawPreviousArrow(column);
       }
     }
 
@@ -45,28 +42,8 @@ namespace PlayerVsAIMediator
       }
     }
 
-    private void DrawArrow(int column)
-    {
-      using (Graphics f = CreateGraphics())
-      {
-        f.Clear(BackColor);
-        f.DrawImage(ArrowIcon, column * SlotDiameter, 0);
-        f.DrawImage(ArrowIcon, _previousColumn * SlotDiameter, 0);
-      }
-    }
-
-    private void DrawPreviousArrow(int column)
-    {
-      using (Graphics f = CreateGraphics())
-      {
-        f.DrawImage(ArrowIcon, column * SlotDiameter, 0);
-        _previousColumn = column;
-      }
-    }
-
     private static int GetSelectedColumn(MouseEventArgs e) => e.X / SlotDiameter;
 
     private int _currentHoverColumn = -1;
-    private int _previousColumn = -1;
   }
 }
