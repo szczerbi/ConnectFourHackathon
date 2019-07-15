@@ -93,14 +93,6 @@
       <Project>{E42E1286-C71D-4F8E-9866-B34F09F86653}</Project>
       <Name>ConnectFourBot</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mediator\Mediator.csproj">
-      <Project>{14002E76-5B97-470B-960E-744B8D52CC2D}</Project>
-      <Name>Mediator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Player\Player.csproj">
-      <Project>{76DAA5A7-26BD-4C70-BF77-E75A4CF2DA62}</Project>
-      <Name>Player</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{C3262F33-0BF1-46C8-BF50-DF30B8E0A41C}</Project>
       <Name>Util</Name>

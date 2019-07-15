@@ -46,26 +46,72 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectFourStartPage.cs">
+    <Compile Include="Main\ConnectFourStartPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConnectFourStartPage.Designer.cs">
+    <Compile Include="Main\ConnectFourStartPage.Designer.cs">
       <DependentUpon>ConnectFourStartPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayConnectFour.cs" />
+    <Compile Include="Main\PlayConnectFour.cs" />
+    <Compile Include="Mediator\AIvsAI\AIVsAIBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mediator\AIvsAI\AIVsAIBoard.Designer.cs">
+      <DependentUpon>AIVsAIBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mediator\AIvsAI\SelectTwoAI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mediator\AIvsAI\SelectTwoAI.Designer.cs">
+      <DependentUpon>SelectTwoAI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mediator\Board.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mediator\Board.Designer.cs">
+      <DependentUpon>Board.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mediator\GameWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mediator\GameWin.Designer.cs">
+      <DependentUpon>GameWin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mediator\PlayerVsAI\HumanPlayer.cs" />
+    <Compile Include="Mediator\PlayerVsAI\PlayerVsAIBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mediator\PlayerVsAI\PlayerVsAIBoard.Designer.cs">
+      <DependentUpon>PlayerVsAIBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mediator\PlayerVsAI\SelectAI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mediator\PlayerVsAI\SelectAI.Designer.cs">
+      <DependentUpon>SelectAI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mediator\StateController.cs" />
+    <Compile Include="Player\ArtificialPlayer.cs" />
+    <Compile Include="Player\BotLister.cs" />
+    <Compile Include="Player\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ConnectFourStartPage.resx">
+    <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\Referee.cs" />
+    <EmbeddedResource Include="Main\ConnectFourStartPage.resx">
       <DependentUpon>ConnectFourStartPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Mediator\AIvsAI\SelectTwoAI.resx">
+      <DependentUpon>SelectTwoAI.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Mediator\Board.resx">
+      <DependentUpon>Board.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mediator\GameWin.resx">
+      <DependentUpon>GameWin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mediator\PlayerVsAI\SelectAI.resx">
+      <DependentUpon>SelectAI.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,18 +126,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AIVsAIMediator\AIVsAIMediator.csproj">
-      <Project>{7243C7F4-CBF6-40BF-8EDD-9C77824CCEE2}</Project>
-      <Name>AIVsAIMediator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mediator\Mediator.csproj">
-      <Project>{14002E76-5B97-470B-960E-744B8D52CC2D}</Project>
-      <Name>Mediator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PlayerVsAIMediator\PlayerVsAIMediator.csproj">
-      <Project>{AC70DE08-D2A7-4767-A260-3346817A4217}</Project>
-      <Name>PlayerVsAIMediator</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Mediator\Resources\red_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mediator\Resources\yellow_arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

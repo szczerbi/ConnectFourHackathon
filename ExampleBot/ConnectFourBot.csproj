@@ -44,13 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Player\Player.csproj">
-      <Project>{76DAA5A7-26BD-4C70-BF77-E75A4CF2DA62}</Project>
-      <Name>Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Util\Util.csproj">
-      <Project>{C3262F33-0BF1-46C8-BF50-DF30B8E0A41C}</Project>
-      <Name>Util</Name>
+    <ProjectReference Include="..\ConnectFour\Main.csproj">
+      <Project>{E056E4A1-D768-4F46-86C3-1E43B226B523}</Project>
+      <Name>Main</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
