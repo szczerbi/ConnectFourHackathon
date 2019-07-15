@@ -1,7 +1,9 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using Mediator;
+using Player;
 using Util;
+using System.Linq;
 
 namespace PlayerVsAIMediator
 {
@@ -17,7 +19,7 @@ namespace PlayerVsAIMediator
     protected override StateController BuildStateController()
     {
       var player1 = new HumanPlayer { Arrow = RedArrow, Color = Color.Red };
-      var player2 = new ConnectFourBot { Arrow = YellowArrow, Color = Color.Yellow };
+      var player2 = BotLister.ListBots().First();//new ConnectFourBot { Arrow = YellowArrow, Color = Color.Yellow };
       return new StateController(player1, player2, this);
     }
 
