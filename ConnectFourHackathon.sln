@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Player", "Player\Player.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{C3262F33-0BF1-46C8-BF50-DF30B8E0A41C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleBot", "ExampleBot\ExampleBot.csproj", "{E42E1286-C71D-4F8E-9866-B34F09F86653}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectFourBot", "ExampleBot\ConnectFourBot.csproj", "{E42E1286-C71D-4F8E-9866-B34F09F86653}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

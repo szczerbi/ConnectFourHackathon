@@ -80,9 +80,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExampleBot\ExampleBot.csproj">
+    <ProjectReference Include="..\ExampleBot\ConnectFourBot.csproj">
       <Project>{E42E1286-C71D-4F8E-9866-B34F09F86653}</Project>
-      <Name>ExampleBot</Name>
+      <Name>ConnectFourBot</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mediator\Mediator.csproj">
       <Project>{14002E76-5B97-470B-960E-744B8D52CC2D}</Project>
