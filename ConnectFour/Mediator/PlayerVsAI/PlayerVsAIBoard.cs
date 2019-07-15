@@ -16,15 +16,6 @@ namespace PlayerVsAIMediator
       GameBoard.MouseClick += Board_MouseClick;
     }
 
-    protected override StateController BuildStateController()
-    {
-      var player1 = new HumanPlayer { Arrow = RedArrow, Color = Color.Red };
-      var player2 = BotLister.ListBots().First();
-      player2.Arrow = YellowArrow;
-      player2.Color = Color.Yellow;
-      return new StateController(player1, player2, this);
-    }
-
     private void Board_MouseClick(object sender, MouseEventArgs e)
     {
       if (StateController.WinState == WinState.InPlay && StateController.GetCurrentPlayer() is HumanPlayer)

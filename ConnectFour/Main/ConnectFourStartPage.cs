@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using AIVsAIMediator;
-using Mediator;
-using PlayerVsAIMediator;
 
 namespace ConnectFour
 {
@@ -15,16 +12,14 @@ namespace ConnectFour
 
     private void AIVsAI_Click(object sender, EventArgs e)
     {
-      _gameBoard = new AIVsAIBoard();
-      _gameBoard.Show();
+      var selectPlayers = new SelectTwoAI();
+      selectPlayers.Show();
     }
 
     private void PlayerVsAI_Click(object sender, EventArgs e)
     {
-      _gameBoard = new PlayerVsAIBoard();
-      _gameBoard.Show();
+      var selectPlayers = new SelectAI();
+      selectPlayers.Show();
     }
-
-    private Board _gameBoard;
   }
 }

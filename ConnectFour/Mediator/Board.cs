@@ -11,13 +11,19 @@ namespace Mediator
     {
       InitializeComponent();
       InitImages();
-      StateController = BuildStateController();
       GameBoard.Paint += Board_Paint;
     }
 
-    public StateController StateController { get; protected set; }
+    public void SetupPlayers(Player.Player player1, Player.Player player2)
+    {
+      player1.Arrow = YellowArrow;
+      player1.Color = Color.Yellow;
+      player2.Arrow = RedArrow;
+      player2.Color = Color.Red;
+      StateController = new StateController(player1, player2, this);
+    }
 
-    protected virtual StateController BuildStateController() => new StateController(null, null, this);
+    public StateController StateController { get; protected set; }
 
     private void Board_Paint(object sender, PaintEventArgs e)
     {
