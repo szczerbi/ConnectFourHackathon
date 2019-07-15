@@ -21,10 +21,9 @@ namespace Player
       {
         foreach (var type in assembly.GetTypes())
         {
-          var myInterfaceType = typeof(ArtificialPlayer);
-          if (type != myInterfaceType && myInterfaceType.IsAssignableFrom(type))
+          if (type != typeof(ArtificialPlayer) && typeof(ArtificialPlayer).IsAssignableFrom(type))
           {
-            bots.Add((ArtificialPlayer) Activator.CreateInstance(myInterfaceType));
+            bots.Add((ArtificialPlayer) Activator.CreateInstance(type));
           }
         }
       }

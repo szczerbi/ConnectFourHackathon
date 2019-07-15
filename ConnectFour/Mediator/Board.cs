@@ -105,12 +105,12 @@ namespace Mediator
     private void InitImages()
     {
       var assembly = Assembly.GetExecutingAssembly();
-      var redImgStream = assembly.GetManifestResourceStream("Mediator.Resources.red_arrow.png");
+      var redImgStream = assembly.GetManifestResourceStream("Main.Mediator.Resources.red_arrow.png");
       if (redImgStream != null)
       {
         RedArrow = new Bitmap(redImgStream);
       }
-      var yellowImgStream = assembly.GetManifestResourceStream("Mediator.Resources.yellow_arrow.png");
+      var yellowImgStream = assembly.GetManifestResourceStream("Main.Mediator.Resources.yellow_arrow.png");
       if (yellowImgStream != null)
       {
         YellowArrow = new Bitmap(yellowImgStream);
