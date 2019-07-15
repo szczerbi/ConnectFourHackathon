@@ -14,10 +14,9 @@ namespace ConnectFour
 
     private void BindDataSource()
     {
-      var dataSource = BotLister.ListBots();
-      Player1AIList.DataSource = dataSource;
+      Player1AIList.DataSource = BotLister.ListBots();
       Player1AIList.DisplayMember = "PlayerName";
-      Player2AIList.DataSource = dataSource;
+      Player2AIList.DataSource = BotLister.ListBots();
       Player2AIList.DisplayMember = "PlayerName";
     }
 

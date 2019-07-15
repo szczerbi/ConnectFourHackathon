@@ -9,7 +9,7 @@ public class ConnectFourBot : ArtificialPlayer
   {
     for (int i = 0; i < Constants.BoardWidth; i++)
     {
-      if (currentBoard.CheckIfValidMove(currentBoard.GetNextAvailableRow(i)))
+      if (currentBoard.CheckIfValidMove(i))
       {
         return i;
       }

@@ -50,7 +50,7 @@ namespace Mediator
 
     private void UpdateCurrentState()
     {
-      if (CurrentPlayer == Player1)
+      if (CurrentPlayer.ID == Player1.ID)
       {
         CurrentPlayer = Player2;
       }
@@ -60,7 +60,7 @@ namespace Mediator
       }
     }
 
-    private void GetNextBotMove()
+    public void GetNextBotMove()
     {
       var currentBot = GetCurrentPlayer() as ArtificialPlayer;
       if (currentBot != null)

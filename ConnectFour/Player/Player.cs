@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Player
 {
@@ -11,5 +12,6 @@ namespace Player
 
     public Color Color { get; set; }
     public Image Arrow { get; set; }
+    public Guid ID = Guid.NewGuid();
   }
 }

@@ -1,4 +1,7 @@
 ﻿using Mediator;
+using System;
+using System.Windows.Forms;
+using Util;
 
 namespace AIVsAIMediator
 {
@@ -7,6 +10,12 @@ namespace AIVsAIMediator
     public AIVsAIBoard()
     {
       InitializeComponent();
+      GameBoard.Paint += PlayGame;
+    }
+
+    private void PlayGame(object sender, PaintEventArgs e)
+    {
+      StateController.GetNextBotMove();
     }
   }
 }
