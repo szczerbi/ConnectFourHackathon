@@ -33,8 +33,8 @@ How to make a bot:
 4. You can add as many bots as you want in this project - just make a new class that extends
    the ArtificialPlayer abstract class.
 5. When you're done, build the "ConnectFourBot" project.
-6. Grab the resulting .dll and rename it with your full name. One dll per person!
-   (can have multiple bots per dll)
+6. Grab the resulting .dll (will be dumped into ConnectFour/DLLs folder) and rename it with
+   your full name. One dll per person! (can have multiple bots per dll)
 7. Submit the .dll here:
 https://advicent.sharepoint.com/:f:/s/AdvicentSocial/EmFDaUKLDDVCrAAk7nSUTw8Bvvk9m3Q5fX9HD6cGoN-Zdg?e=p4fZ83
 
@@ -45,7 +45,8 @@ How to test your bot:
   • You vs bot
 • If you'd like to practice against someone else's bot...
   1. Have the other person build the "ConnectFourBot" project with their bot in it.
-  2. Copy the resulting dll, rename it, and drop it into your own 'DLLs' folder in the project.
+  2. Copy the resulting dll, rename it, and drop it into your own 'DLLs' folder in the
+     project.
   3. Run the game - their bot should now show up in the list!
 
 Things to note:
