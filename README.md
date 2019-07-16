@@ -18,7 +18,7 @@
 
 Welcome to the Connect Four Hackathon!
 
-For this contest, we will be pitting dev against dev in a connect four algorithm showdown!
+For this contest, we will be pitting dev against dev in a Connect Four algorithm showdown!
 
 How it works:
 • Every contestant will submit one or more Connect Four bots, each with an algorithm
@@ -52,4 +52,4 @@ Things to note:
 ** PLEASE set the PlayerName to a unique identifier for your bot - this is how we know who
    wins/loses!
 ** If your bot returns an invalid move, it will be prompted again. Any bot that returns
-   10 invalid moves in a row is automagically forfeits the match.
+   10 invalid moves in a row automagically forfeits the match.
