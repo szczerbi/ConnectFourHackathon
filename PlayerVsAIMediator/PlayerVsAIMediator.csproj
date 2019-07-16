@@ -89,7 +89,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExampleBot\ConnectFourBot.csproj">
+    <ProjectReference Include="..\ConnectFourBot\ConnectFourBot.csproj">
       <Project>{E42E1286-C71D-4F8E-9866-B34F09F86653}</Project>
       <Name>ConnectFourBot</Name>
     </ProjectReference>
@@ -100,7 +100,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

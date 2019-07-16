@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "ConnectFour\Main.csproj", "{E056E4A1-D768-4F46-86C3-1E43B226B523}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectFourBot", "ExampleBot\ConnectFourBot.csproj", "{E42E1286-C71D-4F8E-9866-B34F09F86653}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectFourBot", "ConnectFourBot\ConnectFourBot.csproj", "{E42E1286-C71D-4F8E-9866-B34F09F86653}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
