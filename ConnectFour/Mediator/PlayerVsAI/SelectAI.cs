@@ -23,7 +23,7 @@ namespace ConnectFour
     {
       Close();
       var board = new PlayerVsAIBoard();
-      board.SetupPlayers(new HumanPlayer(), (ArtificialPlayer) AIPlayerList.SelectedItem);
+      board.SetUpPlayers(new HumanPlayer(), (ArtificialPlayer) AIPlayerList.SelectedItem);
       board.Show();
     }
   }

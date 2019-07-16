@@ -24,7 +24,7 @@ namespace ConnectFour
     {
       Close();
       var board = new AIVsAIBoard();
-      board.SetupPlayers((ArtificialPlayer)Player1AIList.SelectedItem, (ArtificialPlayer)Player2AIList.SelectedItem);
+      board.SetUpPlayers((ArtificialPlayer)Player1AIList.SelectedItem, (ArtificialPlayer)Player2AIList.SelectedItem);
       board.Show();
     }
   }

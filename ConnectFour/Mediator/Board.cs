@@ -14,7 +14,7 @@ namespace Mediator
       GameBoard.Paint += Board_Paint;
     }
 
-    public void SetupPlayers(Player.Player player1, Player.Player player2)
+    public void SetUpPlayers(Player.Player player1, Player.Player player2)
     {
       player1.Arrow = YellowArrow;
       player1.Color = Color.Yellow;
