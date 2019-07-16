@@ -16,7 +16,7 @@
                                                                                            
 ============================================================================================
 
-Welcome to the Connect Four Hackathon!
+Welcome to the Connect Four Hackathon!!
 
 For this contest, we will be pitting dev against dev in a Connect Four algorithm showdown!
 
