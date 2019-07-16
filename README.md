@@ -32,7 +32,7 @@ How to make a bot:
    or make another bot to play against the example.
 4. You can add as many bots as you want in this project - just make a new class that extends
    the ArtificialPlayer abstract class.
-5. When your done, build the "ConnectFourBot" project.
+5. When you're done, build the "ConnectFourBot" project.
 6. Grab the resulting .dll and rename it with your full name. One dll per person!
    (can have multiple bots per dll)
 7. Submit the .dll here:
